@@ -1,0 +1,22 @@
+{
+  "tasks": [
+  {
+    "label": "build",
+    "type": "shell",
+    "command": "cmake",
+    "args": [
+      "--build",
+      "./build"
+    ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+    "presentation": {
+      "reveal": "silent",
+    },
+    "problemMatcher": "$gcc"
+  }
+  ],
+  "version": "2.0.0"
+}

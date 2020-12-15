@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="entazza::KMapBase">
+    <DisplayString>{m_map}</DisplayString>
+    <Expand>
+      <Item Name="[m_map]">(*m_map)</Item>
+    </Expand>
+  </Type>
+  <Type Name="entazza::KListBase">
+    <DisplayString>{m_list}</DisplayString>
+    <Expand>
+      <Item Name="[m_list]">(*m_list)</Item>
+    </Expand>
+  </Type>
+  <Type Name="entazza::KArgVariant">
+    <DisplayString Condition="m_vector==true">{{std::vector {m_type} }}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::map">{{{m_value.map},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::list">{{{m_value.list},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::string">{{{m_value.string},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::int8">{{{m_value.int8},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::int16">{{{m_value.int16},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::int32">{{{m_value.int32},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::int64">{{{m_value.int64},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::uint8">{{{m_value.uint8},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::uint16">{{{m_value.uint16},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::uint32">{{{m_value.uint32},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::uint64">{{{m_value.uint64},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::float32">{{{m_value.float32},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::float64">{{{m_value.float64},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::timestamp">{{{m_value.timestamp._MyDur},{m_type}}}</DisplayString>
+    <DisplayString Condition="m_type==KArgTypes::duration">{{{m_value.duration._MyRep},{m_type}}}</DisplayString>
+    <DisplayString>type={m_type},{m_value}</DisplayString>
+  </Type>
+</AutoVisualizer>
