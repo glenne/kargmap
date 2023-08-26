@@ -34,7 +34,9 @@ public:
    * @param buf A pointer to memory to place a cbor encoded representation.
    * @param maxBufLen The size in bytes of the buf memory.
    */
-  CborSerializer(void *buf, const uint32_t maxBufLen) : cbor(buf, maxBufLen) {}
+  CborSerializer(void *buf, const uint32_t maxBufLen,
+                 const bool nullTerminate = false)
+      : cbor(buf, maxBufLen, nullTerminate) {}
 
   /**
    * @brief Encode a KArgMap instance into a CBOR binary array of bytes.

@@ -299,7 +299,6 @@ target_link_libraries(KArgMapExample
 
 Cmake - Download and install from [cmake.org](https://cmake.org/download/).  Cmake 3.14.0 or above.
 
-
 #### Building and running unit tests
 
 This example shows commands for Linux.  Add the appropriate changes for Visual Studio.
@@ -483,7 +482,7 @@ The KArgMap and KArgList containers can be cast to const versions with zero over
 the programmer to use 'const KArgMap&' as a parameter to functions.
 
 To facilitate use in threaded environments, a deepClone() method is provided which duplicates the contents by creating new containers for all children and children's children
-in a KArgMap structure.  `std::vector<T>` elements are not duplicated.   A future 'cloneAll' or 'duplicate' method will be provided that will also duplicate std::vector<T>
+in a KArgMap structure.  `std::vector<T>` elements are not duplicated.   A future 'cloneAll' or 'duplicate' method will be provided that will also duplicate'std::vector<T>
 elements.
 
 ## Questions/Feedback
