@@ -481,10 +481,10 @@ public:
     int16_t int16;
     int32_t int32;
     int64_t int64;
-    int8_t uint8;
-    int16_t uint16;
-    int32_t uint32;
-    int64_t uint64;
+    uint8_t uint8;
+    uint16_t uint16;
+    uint32_t uint32;
+    uint64_t uint64;
     float float32;
     std::complex<float> cfloat32;
     std::complex<double> cfloat64;

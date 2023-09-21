@@ -732,6 +732,16 @@ TEST_F(KArgMapTest, json) {
   ASSERT_EQ(json, json2);
 }
 
+TEST_F(KArgMapTest, uint8_to_string) {
+  KArgMap map;
+  map.set("foo",uint8_t(240));
+  auto json = std::string(map);
+  auto json2 = map.to_string();
+
+  ASSERT_EQ("{\"foo\":240}", json);
+  ASSERT_EQ(json, json2);
+}
+
 TEST_F(KArgMapTest, json_stream) {
   KArgMap map;
   map.set("foo", "bar");
