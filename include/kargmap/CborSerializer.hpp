@@ -53,7 +53,7 @@ public:
   inline KArgMap decode() {
     auto info = cbor.getNextField();
     // We must be in a map to find anything
-    if (info.major != entazza::kCborMap) {
+    if (info.majorval != entazza::kCborMap) {
       return KArgMap();
     }
     auto value = readItem("root");
@@ -348,7 +348,7 @@ private:
     if (tag == entazza::kCborTagTimeExt ||
         tag == entazza::kCborTagDurationExt) {
       // expect a map
-      if (value.major != entazza::kCborMap) {
+      if (value.majorval != entazza::kCborMap) {
         cbor.skipField(value);
         return "Expected Map for Time/Duration";
       }
@@ -358,20 +358,20 @@ private:
       while (numItems-- != 0) {
         auto key = cbor.getNextField();
         auto keyValue = cbor.getFieldValue<uint8_t>(key);
-        if (key.major == entazza::kCborPosInt && keyValue == 1) {
+        if (key.majorval == entazza::kCborPosInt && keyValue == 1) {
           cbor.mDataOffset += key.headerBytes;
           value = cbor.getNextField();
-          if (value.major != entazza::kCborPosInt) {
+          if (value.majorval != entazza::kCborPosInt) {
             cbor.skipField(value);
             continue;
           }
           secs = cbor.getFieldValue<uint32_t>(value);
           cbor.mDataOffset += value.headerBytes;
-        } else if (key.major == entazza::kCborNegInt &&
+        } else if (key.majorval == entazza::kCborNegInt &&
                    keyValue == uint8_t(-1 + 9)) {
           cbor.mDataOffset += key.headerBytes;
           value = cbor.getNextField();
-          if (value.major != kCborPosInt) {
+          if (value.majorval != kCborPosInt) {
             cbor.skipField(value);
             continue;
           }
@@ -394,7 +394,7 @@ private:
 
     if (tag == kCborTagHomogeneousArray) {
       // Expect an array where every member is the same type
-      if (value.major != kCborArray) {
+      if (value.majorval != kCborArray) {
         cbor.skipField(value);
         return KArgVariant();
       }
@@ -407,18 +407,18 @@ private:
       }
       // First element has the type.  Check for KArgMap array types.
       auto element = cbor.getNextField();
-      if (element.major == kCborSimple &&
-          (element.minor == 20 || element.minor == 21)) {
+      if (element.majorval == kCborSimple &&
+          (element.minorval == 20 || element.minorval == 21)) {
         return std::move(decodeHomogeneousArray<bool>(numElements));
-      } else if (element.major == kCborMap && element.tag == kCborTagTimeExt) {
+      } else if (element.majorval == kCborMap && element.tag == kCborTagTimeExt) {
 
         cbor.mDataOffset -= 3; // Back up to read tag again inside the loop
         return std::move(decodeHomogeneousArray<KTimestamp>(numElements));
-      } else if (element.major == kCborMap &&
+      } else if (element.majorval == kCborMap &&
                  element.tag == kCborTagDurationExt) {
         cbor.mDataOffset -= 3; // Back up to read tag again inside the loop
         return std::move(decodeHomogeneousArray<KDuration>(numElements));
-      } else if (element.major == kCborUTF8String) {
+      } else if (element.majorval == kCborUTF8String) {
         return std::move(decodeHomogeneousArray<std::string>(numElements));
       } else {
         // Unknown type
@@ -430,7 +430,7 @@ private:
       }
     }
 
-    switch (value.major) {
+    switch (value.majorval) {
     case kCborByteString: {
       auto len = cbor.getFieldValue<uint32_t>(value);
       cbor.mDataOffset += value.headerBytes + len;
@@ -513,7 +513,7 @@ private:
     }
     case kCborSimple: {
       cbor.mDataOffset += value.headerBytes;
-      switch (value.minor) {
+      switch (value.minorval) {
       case 20:
         return bool(false);
       case 21:
